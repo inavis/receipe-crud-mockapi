@@ -1,38 +1,151 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* body{
+  background-color: rgb(63, 62, 63);
+} */
+.content {
+  row-gap: 50px;
+  column-gap: 10px;
+  margin: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+}
+
+.card {
+  /* background-color: rgb(26, 24, 26);
+  color: white; */
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+  height: min-content;
+  font-size: small;
+  /* text-align: center; */
+   /* box-shadow: 1px 2px rgb(70, 58, 58); */
+   overflow: hidden;
+
+   border: 7px solid rgb(70, 58, 58); 
+}
+.card img{
+
+  object-fit: cover;
+  width: 100%;
+  height:400px;
+  margin-top: 30px;
+  border: 2px solid white;
+  
+}
+/* .card:hover{
+  background-color: rgb(39, 39, 32);
+} */
+Button{
+  width: 100%;
+}
+.heading{
+  text-align: center;
+  /* color: white; */
+  /* color:rgb(109, 33, 133); */
+}
+
+.snippet{
+  border: 6px solid rgb(218, 206, 219);
+  background-color: white;
+  /* color:black; */
+  margin: 15px;
+  padding: 5px;
+  font-size: medium;
+  border-radius: 10px;
+}
+.table{
+  margin: 1px;
+  /* border: 1px solid brown; */
+}
+/* .Fab-button{
+  background-color: brown;
   color: white;
+} */
+
+
+/* .badge{
+  padding:3px 13px;
+  text-align: center;
+  border: 1px solid red;
+  border-radius: 50px;
+}
+.badge:hover{
+  background-color: brown;
+} */
+/* .p-5{
+  padding-top: 5px;
+  text-align: center;
+} */
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #61dafb;
+
+.form{
+
+ text-align: center;
+ width: 80%;
+ padding: 20px;
+ border-radius: 10px;
+ /* background-color: rgb(229, 233, 243);
+ border:4px solid black; */
+ /* box-shadow: 1px 2px gray; */
+}
+.form-labels{
+  float:left;
+  margin: 0% 1%;
+  padding-bottom: 15px;
+  font-size: small;
+  /* color: rgb(109, 33, 133); */
+  /* color: gray; */
+}
+.textbox{
+  width: 98%;
+  padding: 12px 20px;
+  margin: 8px 5px;
+  box-sizing: border-box;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.notfoundimage{
+  width: 100%;
 }
+.mainflex{
+  margin-left: 5%;
+}
+.rating{
+  size: 200px;
+  margin: 20px;
+}
+
+@media(max-width:600px){
+ .form{
+   margin:2% 4% ;
+ }
+ .boardimg{
+  margin: 0px;
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+}
+@media(min-width:601px){
+  .form{
+    margin:2% 6% ;
+  }
+  .boardimg{
+    margin: 0px;
+    width: 100%;
+    height: 650px;
+    object-fit: cover;
+  }
+  
+}
+
+
+
