@@ -175,11 +175,11 @@ function Welcome({receipelist}){
           
         (index+1===length)?setindex(0):setindex(index+1)
           console.log(index)
-      }, 2000);
+      }, 1500);
   return(
     <div style={{textAlign:"center"}}>
       <div><h1>Welcome to Receipes corner</h1></div>
-      <div>Go to <b>All Receipes tab</b> to know more</div>
+      <div>Go to <b>All Receipes tab</b> to explore and have fun</div>
       <br></br>
       <div >
         <img src={receipelist[index].picturelink} className='boardimg'/>

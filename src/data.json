@@ -67,7 +67,7 @@
   {
     "id":"101",
     "name": "MASALA DOSA",
-    "picturelink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyQ3pPz1D5EppoJcKYOnLvE4UEHDwi-xc2FQ&usqp=CAU",
+    "picturelink": "https://media.istockphoto.com/photos/cheese-masala-dosa-recipe-with-sambar-and-chutney-selective-focus-picture-id1156896083?k=20&m=1156896083&s=170667a&w=0&h=FKiCT45vs38jaQgWADl12j7uUl9pZmIFeiPJ9DfORGM=",
     "ingredients": [
       "1 1/2 cup red rice",
       "1 1/2 cup raw rice",
@@ -199,7 +199,12 @@
       "finally, top with crispy tofu and enjoy moong sprouts salad with salad dressing as required."
     ],
     "videolink": "https://www.youtube.com/embed/MonVmZkFI0E",
-    "notes": [],
+    "notes": [
+      "firstly, you can add sprouts of your choice or mix and match." ,
+"also, add any fresh veggies or fruits to make it refreshing." ,
+"additionally, adjust the amount of seasonings to balance the flavour." ,
+"finally, protein salad recipe tastes great when prepared with fresh vegetables."
+    ],
     "preptime": "10 mins",
     "cooktime": "10 mins",
     "soakingtime": "",
@@ -382,7 +387,7 @@
   {
     "id":"105",
     "name": "PANI PURI",
-    "picturelink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYaSqyb-rVISzhY7BuIserSQ_MUBaVbBHbcQ&usqp=CAU",
+    "picturelink": "https://static.toiimg.com/thumb/61048461.cms?imgsize=1981854&width=800&height=800",
     "ingredients": [
         "1 cup rava / semolina / suji (coarse)" ,
         "2 tbsp maida / plain flour" ,

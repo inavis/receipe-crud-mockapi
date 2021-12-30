@@ -13,7 +13,7 @@ const validateForm =yup.object({
     ingredients:yup.string().required(),
      receipe :yup.string().required(), 
      videolink :yup.string().url().required(),
-         notes:yup.string(),
+         notes:yup.string().required(),
           preptime:yup.string(),
            cooktime:yup.string(), 
            soakingtime:yup.string(),
@@ -172,7 +172,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
+        <TextField id="filled-basic" required className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
          id='notes'
          name='notes'
          value={values.notes}

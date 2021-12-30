@@ -13,7 +13,7 @@ const validateForm =yup.object({
     ingredients:yup.string().required(),
      receipe :yup.string().required(), 
      videolink :yup.string().url().required(),
-         notes:yup.string(),
+         notes:yup.string().required(),
           preptime:yup.string(),
            cooktime:yup.string(), 
            soakingtime:yup.string(),
@@ -64,9 +64,9 @@ export function AddReceipe() {
     validationSchema:validateForm,
     onSubmit:(values) =>{
       values.name=values.name.toString().trim().toUpperCase();
-      values.ingredients =  (values.ingredients.toString().trim().length > 0) ? values.ingredients.toString().split(",") : ["NA"]
-      values.receipe =  (values.receipe.toString().trim().length > 0) ? values.receipe.toString().split(".") : ["NA"]
-      values.notes =  (values.notes.toString().trim().length > 0) ? values.notes.toString().split(".") : ["NA"]
+      values.ingredients =  values.ingredients.toString().split(",") 
+      values.receipe =  values.receipe.toString().split(".") 
+      values.notes =   values.notes.toString().split(".") 
     console.log("On submit value",values)
       addmovie(values);
     }
@@ -124,7 +124,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
+        <TextField id="filled-basic" required className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
          id='notes'
          name='notes'
          value={values.notes}
