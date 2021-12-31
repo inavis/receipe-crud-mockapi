@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 
 import { Formik,useFormik } from 'formik';
 import * as yup from 'yup';
+//using formik and yup for form validation and handling
 
 const validateForm =yup.object({ 
     name:yup.string().required().min(4) , 
@@ -75,6 +76,7 @@ return(
   
 }
 
+//only after getting respective receipe item the form with data can diaplay or else race condition
 function AfterLoad({receipelist}){
 
     const history = useHistory();

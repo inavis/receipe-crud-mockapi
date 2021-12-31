@@ -5,29 +5,15 @@ import { useState,useEffect} from 'react';
 import { Switch, Route, Link,Redirect, useHistory} from "react-router-dom";
 
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+
 import Button from '@mui/material/Button';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+
 
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import IconButton from '@mui/material/IconButton';
-import ClearIcon from '@mui/icons-material/Clear';
-import Fab from '@mui/material/Fab';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 
-import Typography from '@mui/material/Typography';
-import { Divider } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import Fab from '@mui/material/Fab';
+
+
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 
 import AppBar from '@mui/material/AppBar';
@@ -36,20 +22,16 @@ import Toolbar from '@mui/material/Toolbar';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { palette } from '@mui/system';
 
 
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+
+
 import { ShowReceipe } from './ShowReceipe';
 import { ReceipeDetails } from './ReceipeDetails';
 import {AddReceipe} from './AddReceipe';
 import {EditReceipe} from './EditReceipe';
 import Tooltip from '@mui/material/Tooltip';
-import Carousel from 'react-bootstrap/Carousel'
+
 
 function App() {
 
