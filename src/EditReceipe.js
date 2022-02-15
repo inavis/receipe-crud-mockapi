@@ -4,7 +4,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-import { Formik,useFormik } from 'formik';
+import {useFormik } from 'formik';
 import * as yup from 'yup';
 //using formik and yup for form validation and handling
 
@@ -44,15 +44,11 @@ const validateForm =yup.object({
 
 export function EditReceipe() {
 
-
-
-  const history = useHistory();
-
   const [receipelist,setreceipelist]=useState(null);
   const { id } = useParams();
  
     let getreceipe =() => {
-        console.log("use Effect");
+        //console.log("use Effect");
         fetch(`${API}/receipe/${id}`,{
           method:"GET"
         })
@@ -80,13 +76,14 @@ return(
 
 //only after getting respective receipe item the form with data can diaplay or else race condition
 function AfterLoad({receipelist}){
+  
 
     const history = useHistory();
     
   const buttonstyle = { background: "black", color: "white", border: "2px solid white" };
 
 
-    let {id, name, picturelink, ingredients, receipe, videolink, notes,
+    let {_id, name, picturelink, ingredients, receipe, videolink, notes,
          preptime, cooktime, soakingtime, fermentationtime, totaltime, course, cuisine, 
          servings, calories, carbohydrates, protein, fat,
          sodium, potassium, fiber, sugar, calcium, iron, vitamina, vitaminc} = receipelist;
@@ -101,17 +98,14 @@ function AfterLoad({receipelist}){
 
           headers.append('Content-Type', 'application/json');
           headers.append('Accept', 'application/json');
-          headers.append('Origin','*');
+          headers.append('Origin','http://localhost:3000');
           
-            fetch(`${API}/receipe/${id}`,{
+            fetch(`${API}/receipe/${_id}`,{
               method:"PUT",
               body: JSON.stringify(values),
-              headers:headers,
-              // options:{
-              //   "origin":"http://localhost:3000",
-              //   "Access-Control-Request-Method": "PUT",
-              //   "Access-Control-Request-Headers": "Content-Type"
-              // }
+              headers:{
+                "Content-Type":"application/json"
+              }
             })
             .then((data)=>data.json())
             .then(()=>history.push("/Receipes"))
@@ -128,7 +122,7 @@ function AfterLoad({receipelist}){
       values.ingredients =  (values.ingredients.toString().trim().length > 0) ? values.ingredients.toString().split(",") : ["NA"]
       values.receipe =  (values.receipe.toString().trim().length > 0) ? values.receipe.toString().split(".") : ["NA"]
       values.notes =  (values.notes.toString().trim().length > 0) ? values.notes.toString().split(".") : ["NA"]
-    console.log("On submit value",values)
+    //console.log("On submit value",values)
       updatemovie(values);
     }
 })
@@ -139,7 +133,7 @@ function AfterLoad({receipelist}){
     <form onSubmit={handleSubmit}>
         <div className='form'>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Dish Name" variant="filled" required
+        <TextField  className="textbox" label="Dish Name" variant="filled" required
            id='name'
            name='name'
            value={values.name}
@@ -151,7 +145,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Dish picture link" variant="filled"
+        <TextField  className="textbox" label="Dish picture link" variant="filled"
           required  id='picturelink'
           name='picturelink'
           value={values.picturelink}
@@ -162,7 +156,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Ingredients (separated by comma)" variant="filled"
+        <TextField  className="textbox" label="Ingredients (separated by comma)" variant="filled"
           required  id='ingredients'
           name='ingredients'
           value={values.ingredients}
@@ -173,7 +167,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Instructions / steps to do (separated by full stop)" variant="filled"
+        <TextField  className="textbox" label="Instructions / steps to do (separated by full stop)" variant="filled"
           required id='receipe'
           name='receipe'
           value={values.receipe}
@@ -184,7 +178,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" required className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
+        <TextField  required className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
          id='notes'
          name='notes'
          value={values.notes}
@@ -195,7 +189,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Video link" variant="filled"
+        <TextField  className="textbox" label="Video link" variant="filled"
           required id='videolink'
           name='videolink'
           value={values.videolink}
@@ -206,7 +200,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Prep time (Eg: 5mins)" variant="filled"
+        <TextField  className="textbox" label="Prep time (Eg: 5mins)" variant="filled"
           id='preptime'
           name='preptime'
           value={values.preptime}
@@ -217,7 +211,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="cooking time needed (Eg: 20mins)" variant="filled"
+        <TextField  className="textbox" label="cooking time needed (Eg: 20mins)" variant="filled"
           id='cooktime'
           name='cooktime'
           value={values.cooktime}
@@ -228,7 +222,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="soaking time needed (Eg: 40mins)" variant="filled"
+        <TextField  className="textbox" label="soaking time needed (Eg: 40mins)" variant="filled"
           id='soakingtime'
           name='soakingtime'
           value={values.soakingtime}
@@ -239,7 +233,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="fermentation time needed (Eg: 8hrs)" variant="filled"
+        <TextField className="textbox" label="fermentation time needed (Eg: 8hrs)" variant="filled"
           id='fermentationtime'
           name='fermentationtime'
           value={values.fermentationtime}
@@ -250,7 +244,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Total time needed (Eg: 2 hours)" variant="filled"
+        <TextField className="textbox" label="Total time needed (Eg: 2 hours)" variant="filled"
           id='totaltime'
           name='totaltime'
           value={values.totaltime}
@@ -262,7 +256,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="course type" variant="filled"
+        <TextField  className="textbox" label="course type" variant="filled"
           required id='course'
           name='course'
           value={values.course}
@@ -273,7 +267,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Cuisine" variant="filled"
+        <TextField  className="textbox" label="Cuisine" variant="filled"
           required id='cuisine'
           name='cuisine'
           value={values.cuisine}
@@ -284,7 +278,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="servings (Eg:4 servings)" variant="filled"
+        <TextField  className="textbox" label="servings (Eg:4 servings)" variant="filled"
           required id='servings'
           name='servings'
           value={values.servings}
@@ -295,7 +289,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Calories in Kcal(Kilo calories)" variant="filled"
+        <TextField  className="textbox" label="Calories in Kcal(Kilo calories)" variant="filled"
           id='calories'
           name='calories'
           value={values.calories}
@@ -306,7 +300,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Carbohydrates in g(grams)" variant="filled"
+        <TextField  className="textbox" label="Carbohydrates in g(grams)" variant="filled"
           id='carbohydrates'
           name='carbohydrates'
           value={values.carbohydrates}
@@ -317,7 +311,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Protein in g(grams)" variant="filled"
+        <TextField  className="textbox" label="Protein in g(grams)" variant="filled"
           id='protein'
           name='protein'
           value={values.protein}
@@ -328,7 +322,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Fat in g(grams)" variant="filled"
+        <TextField  className="textbox" label="Fat in g(grams)" variant="filled"
          id='fat'
          name='fat'
          value={values.fat}
@@ -339,7 +333,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Sodium in mg(milli grams)" variant="filled"
+        <TextField  className="textbox" label="Sodium in mg(milli grams)" variant="filled"
           id='sodium'
           name='sodium'
           value={values.sodium}
@@ -350,7 +344,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Potassium in mg(milli grams)" variant="filled"
+        <TextField  className="textbox" label="Potassium in mg(milli grams)" variant="filled"
          id='potassium'
          name='potassium'
          value={values.potassium}
@@ -361,7 +355,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Fiber in mg(milli grams)" variant="filled"
+        <TextField  className="textbox" label="Fiber in mg(milli grams)" variant="filled"
          id='fiber'
          name='fiber'
          value={values.fiber}
@@ -372,7 +366,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Sugar in mg(milli grams)" variant="filled"
+        <TextField  className="textbox" label="Sugar in mg(milli grams)" variant="filled"
           id='sugar'
           name='sugar'
           value={values.sugar}
@@ -383,7 +377,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Calcium in mg(milli grams)" variant="filled"
+        <TextField  className="textbox" label="Calcium in mg(milli grams)" variant="filled"
           id='calcium'
           name='calcium'
           value={values.calcium}
@@ -394,7 +388,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Iron in mg(milli grams)" variant="filled"
+        <TextField  className="textbox" label="Iron in mg(milli grams)" variant="filled"
           id='iron'
           name='iron'
           value={values.iron}
@@ -405,7 +399,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Vitamin A in IU(International Unit)" variant="filled"
+        <TextField className="textbox" label="Vitamin A in IU(International Unit)" variant="filled"
          id='vitamina'
          name='vitamina'
          value={values.vitamina}
@@ -416,7 +410,7 @@ function AfterLoad({receipelist}){
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Vitamin C in mg(milli grams)" variant="filled"
+        <TextField  className="textbox" label="Vitamin C in mg(milli grams)" variant="filled"
          id='vitaminc'
          name='vitaminc'
          value={values.vitaminc}

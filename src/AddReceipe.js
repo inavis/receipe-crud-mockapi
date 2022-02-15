@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 
 import { API } from './global';
 
-import { Formik,useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 //using formik and yup for form validation and handling
 
@@ -46,7 +46,7 @@ export function AddReceipe() {
   const history = useHistory();
 
   const addmovie =(values) =>{
-    console.log("add");
+    //console.log("add");
     fetch(`${API}/receipe`,{
       method:"POST",
       body: JSON.stringify(values),
@@ -69,7 +69,7 @@ export function AddReceipe() {
       values.ingredients =  values.ingredients.toString().split(",") 
       values.receipe =  values.receipe.toString().split(".") 
       values.notes =   values.notes.toString().split(".") 
-    console.log("On submit value",values)
+    //console.log("On submit value",values)
       addmovie(values);
     }
 })
@@ -81,7 +81,7 @@ export function AddReceipe() {
     <form onSubmit={handleSubmit}>
         <div className='form'>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Dish Name" variant="filled" required
+        <TextField  className="textbox" label="Dish Name" variant="filled" required
            id='name'
            name='name'
            value={values.name}
@@ -93,7 +93,7 @@ export function AddReceipe() {
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Dish picture link" variant="filled"
+        <TextField  className="textbox" label="Dish picture link" variant="filled"
           required  id='picturelink'
           name='picturelink'
           value={values.picturelink}
@@ -104,7 +104,7 @@ export function AddReceipe() {
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Ingredients (separated by comma)" variant="filled"
+        <TextField  className="textbox" label="Ingredients (separated by comma)" variant="filled"
           required  id='ingredients'
           name='ingredients'
           value={values.ingredients}
@@ -115,7 +115,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Instructions / steps to do (separated by full stop)" variant="filled"
+        <TextField  className="textbox" label="Instructions / steps to do (separated by full stop)" variant="filled"
           required id='receipe'
           name='receipe'
           value={values.receipe}
@@ -126,7 +126,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" required className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
+        <TextField  required className="textbox" label="Notes / points to remember (separated by full stop)" variant="filled"
          id='notes'
          name='notes'
          value={values.notes}
@@ -137,7 +137,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Video link" variant="filled"
+        <TextField  className="textbox" label="Video link" variant="filled"
           required id='videolink'
           name='videolink'
           value={values.videolink}
@@ -148,7 +148,7 @@ export function AddReceipe() {
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Prep time (Eg: 10mins)" variant="filled"
+        <TextField  className="textbox" label="Prep time (Eg: 10mins)" variant="filled"
           id='preptime'
           name='preptime'
           value={values.preptime}
@@ -159,7 +159,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="cooking time needed (Eg: 50mins)" variant="filled"
+        <TextField  className="textbox" label="cooking time needed (Eg: 50mins)" variant="filled"
           id='cooktime'
           name='cooktime'
           value={values.cooktime}
@@ -170,7 +170,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="soaking time needed (Eg: 20mins)" variant="filled"
+        <TextField  className="textbox" label="soaking time needed (Eg: 20mins)" variant="filled"
           id='soakingtime'
           name='soakingtime'
           value={values.soakingtime}
@@ -181,7 +181,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="fermentation time needed (Eg: 8hrs)" variant="filled"
+        <TextField  className="textbox" label="fermentation time needed (Eg: 8hrs)" variant="filled"
           id='fermentationtime'
           name='fermentationtime'
           value={values.fermentationtime}
@@ -192,7 +192,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Total time needed (Eg: 2hrs)" variant="filled"
+        <TextField className="textbox" label="Total time needed (Eg: 2hrs)" variant="filled"
           id='totaltime'
           name='totaltime'
           value={values.totaltime}
@@ -203,7 +203,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="course type" variant="filled"
+        <TextField  className="textbox" label="course type" variant="filled"
           required id='course'
           name='course'
           value={values.course}
@@ -214,7 +214,7 @@ export function AddReceipe() {
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Cuisine" variant="filled"
+        <TextField className="textbox" label="Cuisine" variant="filled"
           required id='cuisine'
           name='cuisine'
           value={values.cuisine}
@@ -225,7 +225,7 @@ export function AddReceipe() {
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="servings (Eg: 4 servings)" variant="filled"
+        <TextField  className="textbox" label="servings (Eg: 4 servings)" variant="filled"
           required id='servings'
           name='servings'
           value={values.servings}
@@ -236,7 +236,7 @@ export function AddReceipe() {
       </div>
       <br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Calories in KCal (Kilo Calories)" variant="filled"
+        <TextField  className="textbox" label="Calories in KCal (Kilo Calories)" variant="filled"
           id='calories'
           name='calories'
           value={values.calories}
@@ -247,7 +247,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Carbohydrates in g (grams)" variant="filled"
+        <TextField className="textbox" label="Carbohydrates in g (grams)" variant="filled"
           id='carbohydrates'
           name='carbohydrates'
           value={values.carbohydrates}
@@ -258,7 +258,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Protein in g (grams)" variant="filled"
+        <TextField  className="textbox" label="Protein in g (grams)" variant="filled"
           id='protein'
           name='protein'
           value={values.protein}
@@ -269,7 +269,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Fat in g (grams)" variant="filled"
+        <TextField  className="textbox" label="Fat in g (grams)" variant="filled"
          id='fat'
          name='fat'
          value={values.fat}
@@ -280,7 +280,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Sodium in mg (milli grams)" variant="filled"
+        <TextField  className="textbox" label="Sodium in mg (milli grams)" variant="filled"
           id='sodium'
           name='sodium'
           value={values.sodium}
@@ -291,7 +291,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Potassium in mg (milli grams)" variant="filled"
+        <TextField  className="textbox" label="Potassium in mg (milli grams)" variant="filled"
          id='potassium'
          name='potassium'
          value={values.potassium}
@@ -302,7 +302,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Fiber in mg (milli grams)" variant="filled"
+        <TextField  className="textbox" label="Fiber in mg (milli grams)" variant="filled"
          id='fiber'
          name='fiber'
          value={values.fiber}
@@ -313,7 +313,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Sugar in mg (milli grams)" variant="filled"
+        <TextField  className="textbox" label="Sugar in mg (milli grams)" variant="filled"
           id='sugar'
           name='sugar'
           value={values.sugar}
@@ -324,7 +324,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Calcium in mg (milli grams)" variant="filled"
+        <TextField className="textbox" label="Calcium in mg (milli grams)" variant="filled"
           id='calcium'
           name='calcium'
           value={values.calcium}
@@ -335,7 +335,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Iron in mg (milli grams)" variant="filled"
+        <TextField  className="textbox" label="Iron in mg (milli grams)" variant="filled"
           id='iron'
           name='iron'
           value={values.iron}
@@ -346,7 +346,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Vitamin A in IU (International Unit)" variant="filled"
+        <TextField  className="textbox" label="Vitamin A in IU (International Unit)" variant="filled"
          id='vitamina'
          name='vitamina'
          value={values.vitamina}
@@ -357,7 +357,7 @@ export function AddReceipe() {
       </div>
       <br></br><br></br>
       <div>
-        <TextField id="filled-basic" className="textbox" label="Vitamin C in mg (milli grams)" variant="filled"
+        <TextField  className="textbox" label="Vitamin C in mg (milli grams)" variant="filled"
          id='vitaminc'
          name='vitaminc'
          value={values.vitaminc}

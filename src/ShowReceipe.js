@@ -11,13 +11,13 @@ export function ShowReceipe({  mode }) {
     const [receipelist,setreceipelist]=useState(null);
  
     let getreceipe =() => {
-        console.log("use Effect");
+        //console.log("use Effect");
         fetch(`${API}/receipe`,{
           method:"GET"
         })
         .then((data)=>data.json())
         .then((receipe)=>{
-            console.log(receipe)
+            //console.log(receipe)
             setreceipelist(receipe)
          
         })
@@ -84,7 +84,7 @@ export function ShowReceipe({  mode }) {
                     <Tooltip title="delete the receipe">
                     <Fab  aria-label="delete receipe "  color="sec" size="medium"  className='Fab-button' onClick={()=>{
                      const deleteindex = _id;
-                     console.log(deleteindex);
+                     //console.log(deleteindex);
 
                      fetch(`${API}/receipe/${deleteindex}`,{
                         method:"DELETE"

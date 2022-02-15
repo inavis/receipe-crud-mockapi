@@ -62,10 +62,10 @@ export function ReceipeDetails({ mode }) {
   
     const [receipelist,setreceipelist] = useState(null)
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
 
   let getreceipe =() => {
-    console.log("use Effect");
+    //console.log("use Effect");
     fetch(`${API}/receipe/${id}`,{
       method:"GET"
     })
@@ -80,7 +80,7 @@ export function ReceipeDetails({ mode }) {
 
   useEffect(getreceipe,[]);
 
-  console.log(receipelist);
+  //console.log(receipelist);
 
   return(
         <div>
@@ -140,7 +140,7 @@ function AfterLoad({receipelist,mode}){
  </div> : "";
 
 
- console.log(mode);
+ //console.log(mode);
 
 
  return (

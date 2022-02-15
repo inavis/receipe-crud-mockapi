@@ -70,7 +70,7 @@ const paperstyle = mode==="dark"?{background:"#383838"}:{background:"#F8F8F8"}
               <Button color="inherit" onClick={()=>{history.push("/AddReceipes")}}>Add receipes</Button>
               {/* when button clicked theme should change */}
               <Button style={{color:"white"}} onClick={()=>{
-                console.log(theme.palette.mode)
+                //console.log(theme.palette.mode)
                setMode(mode==="dark"?"light":"dark")
               }}>{mode==="dark"?<Brightness7Icon/>:<Brightness4Icon/>}mode</Button>
             </Toolbar>
@@ -125,7 +125,7 @@ export default App;
 function LoadWelcomeData(){
   const [receipelist,setreceipelist]=useState(null);
   let getreceipe =() => {
-    console.log("use Effect");
+    //console.log("use Effect");
     fetch(`${API}/receipe`,{
       method:"GET"
     })
@@ -147,6 +147,8 @@ function LoadWelcomeData(){
 //basic page
 function Welcome({receipelist}){
 
+  const history = useHistory()
+
   const [index,setindex]= useState(0);
 
       const length = receipelist.length
@@ -156,12 +158,12 @@ function Welcome({receipelist}){
       setTimeout(() => {
           
         (index+1===length)?setindex(0):setindex(index+1)
-          console.log(index)
+          //console.log(index)
       }, 1500);
   return(
     <div style={{textAlign:"center"}}>
       <div><h1>Welcome to Receipes corner</h1></div>
-      <div>Go to <b>All Receipes tab</b> to explore and have fun</div>
+      <div>Go to <b onClick={()=>history.push("/Receipes")}>All Receipes tab</b> to explore and have fun</div>
       <br></br>
       <div >
         <img src={receipelist[index].picturelink} className='boardimg'/>
