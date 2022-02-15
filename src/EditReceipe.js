@@ -8,6 +8,8 @@ import { Formik,useFormik } from 'formik';
 import * as yup from 'yup';
 //using formik and yup for form validation and handling
 
+import { API } from './global';
+
 const validateForm =yup.object({ 
     name:yup.string().required().min(4) , 
     picturelink:yup.string().url().required(), 
@@ -51,7 +53,7 @@ export function EditReceipe() {
  
     let getreceipe =() => {
         console.log("use Effect");
-        fetch(`https://61cc589f198df60017aebff0.mockapi.io/receipes/${id}`,{
+        fetch(`${API}/receipe/${id}`,{
           method:"GET"
         })
         .then((data)=>data.json())
@@ -95,13 +97,21 @@ function AfterLoad({receipelist}){
 
     
          const updatemovie =(values) =>{
+          let headers = new Headers();
+
+          headers.append('Content-Type', 'application/json');
+          headers.append('Accept', 'application/json');
+          headers.append('Origin','*');
           
-            fetch(`https://61cc589f198df60017aebff0.mockapi.io/receipes/${id}`,{
+            fetch(`${API}/receipe/${id}`,{
               method:"PUT",
               body: JSON.stringify(values),
-              headers:{
-                "Content-Type":"application/json"
-              }
+              headers:headers,
+              // options:{
+              //   "origin":"http://localhost:3000",
+              //   "Access-Control-Request-Method": "PUT",
+              //   "Access-Control-Request-Headers": "Content-Type"
+              // }
             })
             .then((data)=>data.json())
             .then(()=>history.push("/Receipes"))

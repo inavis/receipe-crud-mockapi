@@ -3,6 +3,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+import { API } from './global';
 
 import { Formik,useFormik } from 'formik';
 import * as yup from 'yup';
@@ -46,7 +47,7 @@ export function AddReceipe() {
 
   const addmovie =(values) =>{
     console.log("add");
-    fetch(`https://61cc589f198df60017aebff0.mockapi.io/receipes`,{
+    fetch(`${API}/receipe`,{
       method:"POST",
       body: JSON.stringify(values),
       headers:{

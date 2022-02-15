@@ -23,7 +23,7 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-
+import { API } from './global';
 
 
 import { ShowReceipe } from './ShowReceipe';
@@ -126,7 +126,7 @@ function LoadWelcomeData(){
   const [receipelist,setreceipelist]=useState(null);
   let getreceipe =() => {
     console.log("use Effect");
-    fetch("https://61cc589f198df60017aebff0.mockapi.io/receipes",{
+    fetch(`${API}/receipe`,{
       method:"GET"
     })
     .then((data)=>data.json())

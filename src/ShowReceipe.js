@@ -4,6 +4,7 @@ import { useState,useEffect} from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import Fab from '@mui/material/Fab';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { API } from './global';
 
 export function ShowReceipe({  mode }) {
  
@@ -11,12 +12,12 @@ export function ShowReceipe({  mode }) {
  
     let getreceipe =() => {
         console.log("use Effect");
-        fetch("https://61cc589f198df60017aebff0.mockapi.io/receipes",{
+        fetch(`${API}/receipe`,{
           method:"GET"
         })
         .then((data)=>data.json())
         .then((receipe)=>{
-    
+            console.log(receipe)
             setreceipelist(receipe)
          
         })
@@ -44,13 +45,13 @@ export function ShowReceipe({  mode }) {
     
           {
             //creating receipe card 
-            receipelist.map(({id, name, picturelink, ingredients, receipe, videolink, notes, preptime, cooktime, soakingtime, fermentationtime, totaltime, course, cuisine, servings, calories, carbohydrates, protein, fat, sodium, potassium, fiber, sugar, calcium, iron, vitamina, vitaminc}) => (
+            receipelist.map(({_id, name, picturelink, ingredients, receipe, videolink, notes, preptime, cooktime, soakingtime, fermentationtime, totaltime, course, cuisine, servings, calories, carbohydrates, protein, fat, sodium, potassium, fiber, sugar, calcium, iron, vitamina, vitaminc}) => (
     
     
     
               <Receipe
-              key={id}
-                 id={id}
+              key={_id}
+                 id={_id}
                 name={name} 
                 picturelink={picturelink} 
                 ingredients={ingredients} 
@@ -82,10 +83,10 @@ export function ShowReceipe({  mode }) {
                 deletebutton={
                     <Tooltip title="delete the receipe">
                     <Fab  aria-label="delete receipe "  color="sec" size="medium"  className='Fab-button' onClick={()=>{
-                     const deleteindex = id;
+                     const deleteindex = _id;
                      console.log(deleteindex);
 
-                     fetch(`https://61cc589f198df60017aebff0.mockapi.io/receipes/${deleteindex}`,{
+                     fetch(`${API}/receipe/${deleteindex}`,{
                         method:"DELETE"
                         })
                       .then((data)=>data.json())

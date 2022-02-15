@@ -21,6 +21,7 @@ import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfi
 import { Receipedisplay, Ingredients } from './App';
 import { useState,useEffect} from 'react';
 
+import { API } from './global';
 
 // //smiley rating
 
@@ -61,10 +62,11 @@ export function ReceipeDetails({ mode }) {
   
     const [receipelist,setreceipelist] = useState(null)
   const { id } = useParams();
+  console.log(id);
 
   let getreceipe =() => {
     console.log("use Effect");
-    fetch(`https://61cc589f198df60017aebff0.mockapi.io/receipes/${id}`,{
+    fetch(`${API}/receipe/${id}`,{
       method:"GET"
     })
     .then((data)=>data.json())
