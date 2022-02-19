@@ -1,8 +1,8 @@
-import logo from './logo.svg';
+
 import './App.css';
 import { useState,useEffect} from 'react';
 
-import { Switch, Route, Link,Redirect, useHistory} from "react-router-dom";
+import { Switch, Route, useHistory} from "react-router-dom";
 
 import * as React from 'react';
 
@@ -19,9 +19,10 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { API } from './global';
 
@@ -30,7 +31,13 @@ import { ShowReceipe } from './ShowReceipe';
 import { ReceipeDetails } from './ReceipeDetails';
 import {AddReceipe} from './AddReceipe';
 import {EditReceipe} from './EditReceipe';
+import { Signup } from './Signup';
+import { ConfirmAccount } from './ConfirmAccount';
+import { Login } from './Login';
+import { ConfirmLogin } from './ConfirmLogin';
 import Tooltip from '@mui/material/Tooltip';
+
+import Cookies from 'js-cookie'
 
 
 function App() {
@@ -49,9 +56,29 @@ const theme = React.useMemo(
     }),
   [mode],
 );
+//Based on token find out if user needs to Sign in or Sign out
+const token = Cookies.get('fortheloveoffood-logintoken');
+const [isSignedin,setisSignedin] = useState((token)?true:false);
+//console.log(token,isSignedin)
+
+const sign_in_or_out = (isSignedin)?
+<Button color="inherit" onClick={()=>{
+  Cookies.remove('fortheloveoffood-logintoken');
+  Cookies.remove('fortheloveoffood-username');
+  Cookies.remove('fortheloveoffood-phonenumber');
+  setisSignedin(false)
+  history.push("/Welcome");
+}}>Sign Out</Button>
+:
+<Button color="inherit" onClick={()=>{
+  history.push("/Login")
+}}>Sign In</Button>
+
+//display user name if logged in
+const user = (isSignedin)?<Button style={{color:"white"}}><AccountCircleIcon/>{Cookies.get('fortheloveoffood-username')}</Button>:""
 
 
-const [editindex,seteditindex] = useState("")
+
 
 const appbarstyle = mode==="dark"?{background:"#202020"}:{background:"#425669"}
 const paperstyle = mode==="dark"?{background:"#383838"}:{background:"#F8F8F8"}
@@ -65,14 +92,23 @@ const paperstyle = mode==="dark"?{background:"#383838"}:{background:"#F8F8F8"}
         {/* Creating a appbar  */}
        <AppBar position="static" style={appbarstyle}>
             <Toolbar>
-              <Button color="inherit" onClick={()=>{history.push("/Welcome")}}>Welcome</Button>
-              <Button color="inherit" onClick={()=>{history.push("/Receipes")}}>All receipes</Button>
-              <Button color="inherit" onClick={()=>{history.push("/AddReceipes")}}>Add receipes</Button>
-              {/* when button clicked theme should change */}
-              <Button style={{color:"white"}} onClick={()=>{
+               {/* when button clicked theme should change */}
+               <Button style={{color:"white"}} onClick={()=>{
                 //console.log(theme.palette.mode)
                setMode(mode==="dark"?"light":"dark")
               }}>{mode==="dark"?<Brightness7Icon/>:<Brightness4Icon/>}mode</Button>
+
+              <Button color="inherit" onClick={()=>{history.push("/Welcome")}}>Welcome</Button>
+              <Button color="inherit" onClick={()=>{history.push("/Receipes")}}>All receipes</Button>
+              <Button color="inherit" onClick={()=>{history.push("/AddReceipes")}}>Add receipes</Button>
+              
+              {
+                sign_in_or_out
+              }
+             {
+               user
+             }
+              
             </Toolbar>
         </AppBar>
        </div>
@@ -81,6 +117,22 @@ const paperstyle = mode==="dark"?{background:"#383838"}:{background:"#F8F8F8"}
          {/* Each route is case */}
          <Route path="/Welcome">
            <LoadWelcomeData/>
+         </Route>
+
+         <Route path="/Signup">
+            <Signup mode={mode}/>
+         </Route>
+
+         <Route path="/Login">
+            <Login mode={mode}/>
+         </Route>
+
+         <Route path="/ConfirmAccount/:number">
+            <ConfirmAccount mode={mode}/>
+         </Route>
+
+         <Route path="/ConfirmLogin/:number">
+            <ConfirmLogin mode={mode} setisSignedin={setisSignedin}/>
          </Route>
 
          <Route path="/Receipes">
@@ -102,6 +154,7 @@ const paperstyle = mode==="dark"?{background:"#383838"}:{background:"#F8F8F8"}
          <Route exact path="/">    
             {/* <ShowReceipe  mode={mode} /> */}
             <LoadWelcomeData/>
+            {/* <Login mode={mode}/> */}
          </Route>
          
          {/* For broken or links that does not exist */}
@@ -118,7 +171,6 @@ const paperstyle = mode==="dark"?{background:"#383838"}:{background:"#F8F8F8"}
 }
 
 export default App;
-
 
 
 //we will get data from mock api and then call welcome(to avaoid race condition)) to have slideshow of images
@@ -139,7 +191,7 @@ function LoadWelcomeData(){
   useEffect(getreceipe,[]);
 
   return(
-    receipelist?<Welcome receipelist={receipelist}/>:""
+    receipelist?<Welcome receipelist={receipelist}/>:<h1 className='heading'>Loading...</h1>
   )
 
 }
@@ -162,11 +214,11 @@ function Welcome({receipelist}){
       }, 1500);
   return(
     <div style={{textAlign:"center"}}>
-      <div><h1>Welcome to Receipes corner</h1></div>
-      <div>Go to <b onClick={()=>history.push("/Receipes")}>All Receipes tab</b> to explore and have fun</div>
+      <div><h1>Welcome to For the Love of Food</h1></div>
+      <div>Go to <b className='link'  onClick={()=>history.push("/Receipes")}>All Receipes tab</b> to explore and have fun</div>
       <br></br>
       <div >
-        <img src={receipelist[index].picturelink} className='boardimg'/>
+        <img alt="recipe images" src={receipelist[index].picturelink} className='boardimg'/>
       </div>
     
     </div>
@@ -179,8 +231,8 @@ function Welcome({receipelist}){
 function NotExist(){
   return(
     <div>
-      {/* <img className='notfoundimage' src="https://jonmgomes.com/wp-content/uploads/2020/08/JMG-404-Crane-GIF.gif"/> */}
-      <img className='notfoundimage' src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2db0b280898527.5cee93b96b7f6.gif"/>
+      {/* <img alt="link not found" className='notfoundimage' src="https://jonmgomes.com/wp-content/uploads/2020/08/JMG-404-Crane-GIF.gif"/> */}
+      <img alt="link not found" className='notfoundimage' src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2db0b280898527.5cee93b96b7f6.gif"/>
     </div>
   )
 }
@@ -202,7 +254,7 @@ export function Receipe({id, name, picturelink, ingredients, receipe, videolink,
 
       
       const history= useHistory()
-      const [receipelist,setreceipelist]=useState("");
+      // const [receipelist,setreceipelist]=useState("");
     
 
           return(
@@ -225,7 +277,7 @@ export function Receipe({id, name, picturelink, ingredients, receipe, videolink,
              <br></br>
             
                 <div>
-                  <img src={picturelink}/>
+                  <img alt="recipe visual" src={picturelink}/>
                 </div>
                 <br></br>
 
@@ -250,7 +302,7 @@ export function Ingredients({ingredients}){
   return (
     <div>
       {
-        ingredients.map((ele)=> ele.trim()!=""?<Steps content={ele}/>:"")
+        ingredients.map((ele)=> ele.trim()!==""?<Steps content={ele} />:"")
       }
     </div>
   )
@@ -259,7 +311,7 @@ export function Receipedisplay({receipe}){
   return (
     <div>
       {
-        receipe.map((ele)=>ele.trim()!=""?<Steps content={ele}/>:"")
+        receipe.map((ele)=>ele.trim()!==""?<Steps content={ele} />:"")
       }
     </div>
   )

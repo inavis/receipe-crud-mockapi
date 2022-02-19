@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams ,useHistory} from "react-router-dom";
 import * as React from 'react';
 import Chip from '@mui/material/Chip';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
@@ -22,6 +22,8 @@ import { Receipedisplay, Ingredients } from './App';
 import { useState,useEffect} from 'react';
 
 import { API } from './global';
+
+import Cookies from 'js-cookie'
 
 // //smiley rating
 
@@ -50,7 +52,7 @@ const customIcons = {
   
   export function IconContainer(props) {
     const { value, ...other } = props;
-    return <span {...other}>{customIcons[value].icon}</span>;
+    return <span {...other} id={customIcons[value]}>{customIcons[value].icon}</span>;
   }
   
   IconContainer.propTypes = {
@@ -59,15 +61,28 @@ const customIcons = {
 
 //to display all details of a receipe when learn more is clicked
 export function ReceipeDetails({ mode }) {
+
+  const history = useHistory();
   
     const [receipelist,setreceipelist] = useState(null)
   const { id } = useParams();
   //console.log(id);
 
+  //If not signed in cannot see receipe details
+  const token = Cookies.get('fortheloveoffood-logintoken');
+
+  if(token===undefined){
+    history.push("/Login")
+  }
+
+
   let getreceipe =() => {
     //console.log("use Effect");
     fetch(`${API}/receipe/${id}`,{
-      method:"GET"
+      method:"GET",
+      headers:{
+        "x-auth-token":token
+      }
     })
     .then((data)=>data.json())
     .then((receipe)=>{
@@ -85,7 +100,7 @@ export function ReceipeDetails({ mode }) {
   return(
         <div>
             {
-                receipelist?<AfterLoad receipelist={receipelist} mode={mode}/>:""
+                receipelist?<AfterLoad receipelist={receipelist} mode={mode}/>:<h1 className='heading'>Loading...</h1>
             }
         </div>
   );
@@ -311,7 +326,7 @@ function AfterLoad({receipelist,mode}){
            defaultValue={2}
            IconContainerComponent={IconContainer}
            highlightSelectedOnly
-           size="large" />
+           size="large" onClick={(e)=>console.log(e.target.id)} />
        </div>
        <br></br>
      </div>

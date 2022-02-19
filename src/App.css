@@ -91,7 +91,6 @@ Button{
  text-align: center;
  width: 80%;
  padding: 20px;
- border-radius: 10px;
  /* background-color: rgb(229, 233, 243);
  border:4px solid black; */
  /* box-shadow: 1px 2px gray; */
@@ -146,6 +145,46 @@ Button{
   }
   
 }
+.link{
+  cursor: pointer;
+  text-decoration: underline;
+  color:lawngreen;
+  /* background-color: palevioletred; */
+}
 
+.background-image1{
+  background: url("https://media.istockphoto.com/photos/food-backgrounds-table-filled-with-large-variety-of-food-picture-id1155240408?b=1&k=20&m=1155240408&s=170667a&w=0&h=xQCZ2QB1TS81T4X0W2tEYDBrkEX4z-wuMYRFvvqg1Qk=");
+  filter:contrast(75%);
+  background-repeat: no-repeat;
+  background-size: 1150px 500px;
+}
+.background-image2{
+  filter:contrast(75%);
+  background: url("https://c4.wallpaperflare.com/wallpaper/869/719/717/cuisine-food-india-indian-wallpaper-preview.jpg");
+  background-repeat: no-repeat;
+  background-size: 1150px 500px;
+  
+}
+.background-image3{
+  filter:contrast(75%);
+  background: url("https://wallpaperaccess.com/full/3973009.jpg");
+  background-repeat: no-repeat;
+  background-size: 1150px 500px;
+  
+}
+.background-image4{
+  /* filter:contrast(75%); */
+  background: url("https://wallpaperaccess.com/full/438099.jpg");
+  background-repeat: no-repeat;
+  background-size: 1150px 500px;
+  
+}
 
-
+.error{
+  color: rgb(185, 78, 78);
+  background-color: rgb(209, 136, 160);
+  border: 1px solid rgb(185, 78, 78);
+  padding: 6px;
+  margin: 25px;
+  border-radius: 5px;
+}

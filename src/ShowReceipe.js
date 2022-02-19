@@ -5,6 +5,8 @@ import Tooltip from '@mui/material/Tooltip';
 import Fab from '@mui/material/Fab';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { API } from './global';
+import Cookies from 'js-cookie'
+import {useHistory} from "react-router-dom";
 
 export function ShowReceipe({  mode }) {
  
@@ -30,7 +32,7 @@ export function ShowReceipe({  mode }) {
       //only after getting data from API we can display the data
       return (
           <div>
-                 {(receipelist)? <AfterLoad receipelist={receipelist} mode={mode} getreceipe={getreceipe}/>:""}
+                 {(receipelist)? <AfterLoad receipelist={receipelist} mode={mode} getreceipe={getreceipe}/>:<h1 className='heading'>Loading...</h1>}
           </div>
       )
 
@@ -38,6 +40,8 @@ export function ShowReceipe({  mode }) {
     }
  
  function AfterLoad({receipelist,mode,getreceipe}){
+
+  const history = useHistory();
     
     return (
         <div className='content'>
@@ -86,14 +90,23 @@ export function ShowReceipe({  mode }) {
                      const deleteindex = _id;
                      //console.log(deleteindex);
 
-                     fetch(`${API}/receipe/${deleteindex}`,{
-                        method:"DELETE"
+                     //if not signed in cannot perform delete operation
+                     const token = Cookies.get('fortheloveoffood-logintoken');
+                      if(token===undefined){
+                        history.push("/Login")
+                      }else{
+                        fetch(`${API}/receipe/${deleteindex}`,{
+                          method:"DELETE",
+                          headers:{
+                            "x-auth-token":token
+                          }
+                          })
+                        .then((data)=>data.json())
+                        .then(()=>{
+                         getreceipe();
                         })
-                      .then((data)=>data.json())
-                      .then(()=>{
-                       getreceipe();
-                      })
-                    
+                      
+                      }
                      }} >
                          
                          <RemoveIcon/>

@@ -8,6 +8,7 @@ import { API } from './global';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 //using formik and yup for form validation and handling
+import Cookies from 'js-cookie'
 
 const validateForm =yup.object({ 
     name:yup.string().required().min(4) , 
@@ -45,13 +46,22 @@ export function AddReceipe() {
   const buttonstyle = { background: "black", color: "white", border: "2px solid white" };
   const history = useHistory();
 
+  //if not signed in , cannot add recipe
+  const token = Cookies.get('fortheloveoffood-logintoken');
+
+  if(token===undefined){
+    history.push("/Login")
+  }
+
+
   const addmovie =(values) =>{
     //console.log("add");
     fetch(`${API}/receipe`,{
       method:"POST",
       body: JSON.stringify(values),
       headers:{
-        "Content-Type":"application/json"
+        "Content-Type":"application/json",
+        "x-auth-token":token
       }
     })
     .then((data)=>data.json())

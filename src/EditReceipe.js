@@ -10,6 +10,8 @@ import * as yup from 'yup';
 
 import { API } from './global';
 
+import Cookies from 'js-cookie'
+
 const validateForm =yup.object({ 
     name:yup.string().required().min(4) , 
     picturelink:yup.string().url().required(), 
@@ -44,13 +46,26 @@ const validateForm =yup.object({
 
 export function EditReceipe() {
 
+  const history = useHistory();
+
+  //if not signed in, cannot edit receipe
+  const token = Cookies.get('fortheloveoffood-logintoken');
+
+  if(token===undefined){
+    history.push("/Login")
+  }
+
+
   const [receipelist,setreceipelist]=useState(null);
   const { id } = useParams();
  
     let getreceipe =() => {
         //console.log("use Effect");
         fetch(`${API}/receipe/${id}`,{
-          method:"GET"
+          method:"GET",
+          headers:{
+            "x-auth-token":token
+          }
         })
         .then((data)=>data.json())
         .then((receipe)=>{
@@ -67,7 +82,7 @@ export function EditReceipe() {
 return(
     <div>
         {
-            receipelist?<AfterLoad receipelist={receipelist}/>:""
+            receipelist?<AfterLoad receipelist={receipelist} token={token}/>:<h1 className='heading'>Loading...</h1>
         }
     </div>
 )
@@ -75,7 +90,7 @@ return(
 }
 
 //only after getting respective receipe item the form with data can diaplay or else race condition
-function AfterLoad({receipelist}){
+function AfterLoad({receipelist,token}){
   
 
     const history = useHistory();
@@ -104,7 +119,8 @@ function AfterLoad({receipelist}){
               method:"PUT",
               body: JSON.stringify(values),
               headers:{
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                "x-auth-token":token
               }
             })
             .then((data)=>data.json())
